@@ -5,16 +5,19 @@ class EmotionTable extends React.Component {
     render() {
       return (  
         <div>
+          {/*You can remove this line and the line below. */}
+          {JSON.stringify(this.props.emotions)}
           <table className="table table-bordered">
             <tbody>
-            {this.props.map((i, j) => 
-                (<tr><td>{i}</td><td>{j}</td></tr>)
+                {this.props.emotions.map((scoreName, scoreValue) => (
+                <tr><td>{scoreName}</td><td>scoreValue</td></tr>)
                 )
-            }
+                }
             </tbody>
           </table>
           </div>
           );
         }
+    
 }
 export default EmotionTable;
