@@ -34,13 +34,13 @@ app.get("/url/emotion", (req,res) => {
         url: req.query.url,
         features: {
             emotion: {
-                document: true,
             }
         }
     };
     getNLUInstance().analyze(ibmParams)
     .then(resSend => {
-        return res.send(resSend) })
+        return res.send(resSend.result.emotion.document.emotion) 
+    })
     .catch(err => {
         return res.send(err.toString());
     });
@@ -51,13 +51,13 @@ app.get("/url/sentiment", (req,res) => {
         url: req.query.url,
         features: {
             sentiment: {
-                document: true,
             }
         }
     };
     getNLUInstance().analyze(ibmParams)
     .then(resSend => {
-        return res.send(resSend) })
+        return res.send(resSend.result.sentiment.document.label) 
+    })
     .catch(err => {
         return res.send(err.toString());
     });
@@ -65,16 +65,16 @@ app.get("/url/sentiment", (req,res) => {
 
 app.get("/text/emotion", (req,res) => {
     let ibmParams = {
-        url: req.query.text,
+        text: req.query.text,
         features: {
             emotion: {
-                document: true,
             }
         }
     };
     getNLUInstance().analyze(ibmParams)
     .then(resSend => {
-        return res.send(resSend) })
+        return res.send(resSend.result.emotion.document.emotion) 
+    })
     .catch(err => {
         return res.send(err.toString());
     });
@@ -82,16 +82,16 @@ app.get("/text/emotion", (req,res) => {
 
 app.get("/text/sentiment", (req,res) => {
     let ibmParams = {
-        url: req.query.text,
+        text: req.query.text,
         features: {
             sentiment: {
-                document: true,
             }
         }
     };
     getNLUInstance().analyze(ibmParams)
     .then(resSend => {
-        return res.send(resSend) })
+        return res.send(resSend.result.sentiment.document.label) 
+    })
     .catch(err => {
         return res.send(err.toString());
     });
@@ -99,4 +99,4 @@ app.get("/text/sentiment", (req,res) => {
 
 let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
-});
+})
